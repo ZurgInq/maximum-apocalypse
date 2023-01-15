@@ -76,24 +76,25 @@
             </div>
         </form>
 
+        <div class="row">
+            <p>Случайные карты:</p>
+        </div>
         <form>
             <div class="mb-3 row">
-                <p>Случайный продукт:</p>
                 <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-outline-danger" onclick="addRandomCard('red')">В красную</button>
-                    <button type="button" class="btn btn-outline-success" onclick="addRandomCard('green')">В зелёную</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="addRandomCard('blue')">В синюю</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="addRandomCard('red', products)">Продукты</button>
+                    <button type="button" class="btn btn-outline-success" onclick="addRandomCard('green', products)">Продукты</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="addRandomCard('blue', products)">Продукты</button>
                 </div>
             </div>
         </form>
 
         <form>
             <div class="mb-3 row">
-                <p>Случайное вооружение:</p>
                 <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-outline-danger" onclick="addRandomCard('red')">В красную</button>
-                    <button type="button" class="btn btn-outline-success" onclick="addRandomCard('green')">В зелёную</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="addRandomCard('blue')">В синюю</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="addRandomCard('red', armaments)">Вооружение</button>
+                    <button type="button" class="btn btn-outline-success" onclick="addRandomCard('green', armaments)">Вооружение</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="addRandomCard('blue', armaments)">Вооружение</button>
                 </div>
             </div>
         </form>
@@ -172,10 +173,15 @@
             alert("В колоде: " + shuffle([...decks[color]]));
         }
 
-        function addRandomCard(color) {
-            const randomCardName = products[Math.floor(Math.random() * products.length)];
+        function addRandomCard(color, cards) {
+            if (cards.length === 0) {
+                alert("Закончилось");
+                return;
+            }
+            const rndCardIdx = Math.floor(Math.random() * cards.length);
+            const randomCardName = cards[rndCardIdx];
             decks[color].push(randomCardName);
-            products.splice(randomCardName, 1);
+            cards.splice(rndCardIdx, 1);
 
             const select = document.getElementById('add-card-select');
             const cardOption = select.querySelector(`option[value=${randomCardName}]`);
