@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Максимум Апокалипсис - помощник</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Максимум Апокалипсис - находки</h1>
+        <div class="mb-3 row">
+            <div class="col-sm-10">
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="button" class="btn btn-outline-danger" onclick="drawCard('red')">Взять карту <small class="deck-size">(0)</small></button>
+                    <button type="button" class="btn btn-outline-success" onclick="drawCard('green')">Взять карту <small class="deck-size">(0)</small></button>
+                    <button type="button" class="btn btn-outline-primary" onclick="drawCard('blue')">Взять карту <small class="deck-size">(0)</small></button>
+                </div>
+            </div>
+        </div>
+        
+        <button type="button" class="btn btn-secondary btn-sm" onclick="toggleBuildDeck()">Собрать колоды</button>
+        <hr>
+    </div>
+    <div class="container" id="buildDeckContainer">
+        <form>
+            <label for="add-card-select" class="col-sm-2 col-form-label">Куда положить</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="put-direct" id="direct-up" value="up">
+                <label class="form-check-label" for="direct-up">наверх</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="put-direct" id="direct-down" value="down" checked>
+                <label class="form-check-label" for="direct-down">вниз</label>
+            </div>              
+            <div class="mb-3 row">
+                <label for="add-card-select" class="col-sm-2 col-form-label">Находки:</label>
+                <div class="col-sm-10">
+                    <select id="add-card-select" class="form-select">
+                        <option value="medicaments">Медикаменты</option>
+                        <option value="junk">Хлам</option>
+                        <option value="binoculars">Бинокль</option>
+                        <option value="fuel">Топливо</option>
+                        <option value="pistol">Пистолет</option>
+                        <option value="flashlight">Фонарь</option>
+                        <option value="antidote">Противоядие</option>
+                        <option value="ambush">Засада</option>
+                        <option value="spares">Запчасти</option>
+                        <option value="rucksack">Рюкзак</option>
+                        <option value="radio-set">Рация</option>
+                        <option value="" disabled>--</option>
+                        <option value="products-1">Продукты (1)</option>
+                        <option value="products-1-all">Продуктовая корзина (1)</option>
+                        <option value="products-2">Продукты (2)</option>
+                        <option value="products-3">Продукты (3)</option>
+                        <option value="products-4">Продукты (4)</option>
+                        <option value="products-5">Продукты (5)</option>
+                        <option value="" disabled>--</option>
+                        <option value="armament">Вооружение</option>
+                        <option value="armament-2">Вооружение (2)</option>
+                        <option value="armament-3">Вооружение (3)</option>
+                        <option value="armament-4">Вооружение (4)</option>
+                        <option value="armament-5">Вооружение (5)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="button" class="btn btn-outline-danger" onclick="addCard('red')">В красную</button>
+                    <button type="button" class="btn btn-outline-success" onclick="addCard('green')">В зелёную</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="addCard('blue')">В синюю</button>
+                </div>
+            </div>
+        </form>
+
+        <form>
+            <div class="mb-3 row">
+                <p>Случайный продукт:</p>
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="button" class="btn btn-outline-danger" onclick="addRandomCard('red')">В красную</button>
+                    <button type="button" class="btn btn-outline-success" onclick="addRandomCard('green')">В зелёную</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="addRandomCard('blue')">В синюю</button>
+                </div>
+            </div>
+        </form>
+
+        <form>
+            <div class="mb-3 row">
+                <p>Случайное вооружение:</p>
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="button" class="btn btn-outline-danger" onclick="addRandomCard('red')">В красную</button>
+                    <button type="button" class="btn btn-outline-success" onclick="addRandomCard('green')">В зелёную</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="addRandomCard('blue')">В синюю</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="mb-3 row">
+            <button type="button" class="btn btn-outline-warning" onclick="shuffleDeck()">Перемешать всё</button>
+        </div>
+
+        <div class="mb-3 row" id="status-alert">
+        </div>
+
+        <div class="mb-3 row">
+            <div class="d-grid gap-2 d-md-block">
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="viewDeck('red')">Список карт</button>
+                <button type="button" class="btn btn-outline-success btn-sm" onclick="viewDeck('green')">Список карт</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="viewDeck('blue')">Список карт</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const decks = {
+            red: [],
+            green: [],
+            blue: [],
+        };
+
+        const countProducts = {
+            'products-1': 4,
+            'products-2': 4,
+            'products-3': 3,
+            'products-4': 2,
+            'products-5': 1,
+            'products-1-all': 1,
+        };
+
+        const countArmament = {
+            'armament': 4,
+            'armament-2': 2,
+            'armament-3': 1,
+            'armament-4': 2,
+            'armament-5': 1,
+        };
+
+        const products = [];
+        const armaments = [];
+
+        function toggleBuildDeck() {
+            const container = document.getElementById('buildDeckContainer');
+            const hidden = container.hidden;
+            container.hidden = !container.hidden;
+        }
+
+        function fillCards(counters, cards) {
+            for (const name in counters) {
+                if (Object.hasOwnProperty.call(counters, name)) {
+                    const count = counters[name];
+                    for (let index = 0; index < count; index++) {
+                        cards.push(name);
+                    }
+                }
+            }
+        }
+        fillCards(countProducts, products);
+        fillCards(countArmament, armaments);
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function viewDeck(color) {
+            alert("В колоде: " + shuffle([...decks[color]]));
+        }
+
+        function addRandomCard(color) {
+            const randomCardName = products[Math.floor(Math.random() * products.length)];
+            decks[color].push(randomCardName);
+            products.splice(randomCardName, 1);
+
+            const select = document.getElementById('add-card-select');
+            const cardOption = select.querySelector(`option[value=${randomCardName}]`);
+
+            alertStatusAdd(document.getElementById('status-alert'), 'Добавлена карта: ' + cardOption.innerText, 'success');
+            updateDeckSize();
+        }
+
+        function shuffleDeck() {
+            decks.red.sort(() => Math.random() - 0.5);
+            decks.blue.sort(() => Math.random() - 0.5);
+            decks.green.sort(() => Math.random() - 0.5);
+
+            alertStatusAdd(document.getElementById('status-alert'), 'Перемешано', 'success');
+        }
+
+        function alertStatusAdd(target, message, type) {
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('alert', `alert-${type}`, 'alert-dismissible');
+            wrapper.innerHTML = [
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>',
+            ].join('');
+            target.append(wrapper);
+            setTimeout(() => {
+                wrapper.querySelector('.btn-close').click();
+            }, 2000);
+        }
+
+        function getCardText(cardName) {
+            const select = document.getElementById('add-card-select');
+            const cardOption = select.querySelector(`option[value=${cardName}]`);
+            return cardOption.innerText;
+        }
+
+        function addCard(color) {
+            const cardSelect = document.getElementById("add-card-select");
+            const selectedCard = cardSelect.options[cardSelect.selectedIndex].value;
+            const directTo = document.querySelector("input[name='put-direct']:checked").value;
+            if ('up') {
+                decks[color].unshift(selectedCard);
+            } else {
+                decks[color].push(selectedCard);
+            }
+            const statusAlert = document.getElementById('status-alert');
+            alertStatusAdd(document.getElementById('status-alert'), 'Добавлена карта: ' + cardSelect.options[cardSelect.selectedIndex].innerText, 'success');
+
+            updateDeckSize();
+        }
+
+        function drawCard(color) {
+            if (decks[color].length > 0) {
+                let drawnCard = decks[color].shift();
+                alert("Взяли карту: " + getCardText(drawnCard));
+                updateDeckSize();
+            } else {
+                alert("Колода пуста!");
+            }
+        }
+
+        function updateDeckSize() {
+            const deckSizeHints = document.getElementsByClassName('deck-size');
+            deckSizeHints[0].textContent = `(${decks.red.length})`;
+            deckSizeHints[1].textContent = `(${decks.green.length})`;
+            deckSizeHints[2].textContent = `(${decks.blue.length})`;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
