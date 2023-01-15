@@ -25,7 +25,7 @@
         <button type="button" class="btn btn-secondary btn-sm" onclick="toggleBuildDeck()">Собрать колоды</button>
         <hr>
     </div>
-    <div class="container" id="buildDeckContainer">
+    <div class="container" id="buildDeckContainer" hidden>
         <form>
             <label for="add-card-select" class="col-sm-2 col-form-label">Куда положить</label>
             <div class="form-check form-check-inline">
@@ -76,10 +76,12 @@
             </div>
         </form>
 
-        <div class="row">
-            <p>Случайные карты:</p>
-        </div>
+        <hr>
+
+        <p>Случайные карты:</p>
+
         <form>
+            
             <div class="mb-3 row">
                 <div class="d-grid gap-2 d-md-block">
                     <button type="button" class="btn btn-outline-danger" onclick="addRandomCard('red', products)">Продукты</button>
@@ -89,6 +91,8 @@
             </div>
         </form>
 
+        <hr>
+        
         <form>
             <div class="mb-3 row">
                 <div class="d-grid gap-2 d-md-block">
@@ -99,9 +103,15 @@
             </div>
         </form>
 
-        <div class="mb-3 row">
-            <button type="button" class="btn btn-outline-warning" onclick="shuffleDeck()">Перемешать всё</button>
-        </div>
+        <hr>
+
+        <form>
+            <div class="mb-3 row">
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="button" class="btn btn-outline-warning" onclick="shuffleDeck()">Перемешать всё</button>
+                </div>
+            </div>
+        </form>
 
         <div class="mb-3 row" id="status-alert">
         </div>
