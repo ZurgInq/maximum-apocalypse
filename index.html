@@ -13,6 +13,7 @@
 <body>
     <div class="container">
         <h1>Максимум Апокалипсис - находки</h1>
+        <div class="mb-3 row fixed-top" id="status-alert"></div>
         <div class="mb-3 row">
             <div class="col-sm-10">
                 <div class="d-grid gap-2 d-md-block">
@@ -22,11 +23,8 @@
                 </div>
             </div>
         </div>
-        
-        <button type="button" class="btn btn-secondary btn-sm" onclick="toggleBuildDeck()">Собрать колоды</button>
+
         <hr>
-    </div>
-    <div class="container" id="buildDeckContainer" hidden>
         <form>
             <label for="add-card-select" class="col-sm-2 col-form-label">Куда положить</label>
             <div class="form-check form-check-inline">
@@ -76,6 +74,82 @@
                 </div>
             </div>
         </form>
+        
+        <button type="button" class="btn btn-secondary btn-sm" onclick="toggleBuildDeck()">Собрать колоды</button>
+        <hr>
+    </div>
+    <div class="container" id="buildDeckContainer" hidden>
+        <form id="multipleAdd">
+            <div class="row">
+                <div class="mb-3 col-6">
+                    Медикаменты<input class="form-control" type="number" name="medicaments">
+                </div>
+                <div class="mb-3 col-6">
+                    Хлам<input class="form-control" type="number" name="junk">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6">
+                    Бинокль<input class="form-control" type="number" name="binoculars">
+                </div>
+                <div class="mb-3 col-6">
+                    Топливо<input class="form-control" type="number" name="fuel">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="mb-3 col-6">
+                    Пистолет
+                    <input class="form-control" type="number" name="pistol">
+                </div>
+                <div class="mb-3 col-6">
+                    Фонарь
+                    <input class="form-control" type="number" name="flashlight">
+                </div>
+            </div>
+            
+        
+            <div class="row">
+                <div class="mb-3 col-6">Противоядие<input class="form-control" type="number" name="antidote"></div>
+                <div class="mb-3 col-6">Засада<input class="form-control" type="number" name="ambush"></div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6">Запчасти<input class="form-control" type="number" name="spares"></div>
+                <div class="mb-3 col-6">Рюкзак<input class="form-control" type="number" name="rucksack"></div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6">Рация<input class="form-control" type="number" name="radio-set"></div>
+                <div class="mb-3 col-6"><label class="form-label" style="color: green">Продукты (1)</label><input class="form-control" type="number" name="products-1"></div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6"><label class="form-label" style="color: green;">Продуктовая корзина (1)</label><input class="form-control" type="number" name="products-1-all"></div>
+                <div class="mb-3 col-6"><label class="form-label" style="color: green;">Продукты (2)</label><input class="form-control" type="number" name="products-2"></div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6"><label class="form-label" style="color: green;">Продукты (3)</label><input class="form-control" type="number" name="products-3"></div>
+                <div class="mb-3 col-6"><label class="form-label" style="color: green;">Продукты (4)</label><input class="form-control" type="number" name="products-4"></div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6"><label class="form-label" style="color: green;">Продукты (5)</label><input class="form-control" type="number" name="products-5"></div>
+                <div class="mb-3 col-6"><label class="form-label" style="color: blue">Вооружение</label><input class="form-control" type="number" name="armament"></div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6"><label class="form-label" style="color: blue">Вооружение (2)</label><input class="form-control" type="number" name="armament-2"></div>
+                <div class="mb-3 col-6"><label class="form-label" style="color: blue">Вооружение (3)</label><input class="form-control" type="number" name="armament-3"></div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6"><label class="form-label" style="color: blue">Вооружение (4)</label><input class="form-control" type="number" name="armament-4"></div>
+                <div class="mb-3 col-6"><label class="form-label" style="color: blue">Вооружение (5)</label><input class="form-control" type="number" name="armament-5"></div>
+            </div>
+            <div class="mb-3 row">
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="button" class="btn btn-outline-danger" onclick="batchAddCard('red')">В красную</button>
+                    <button type="button" class="btn btn-outline-success" onclick="batchAddCard('green')">В зелёную</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="batchAddCard('blue')">В синюю</button>
+                    <button type="button" class="btn btn-secondary" onclick="batchClear()">Сброс</button>
+                </div>
+            </div>
+        </form>
 
         <hr>
 
@@ -113,9 +187,6 @@
                 </div>
             </div>
         </form>
-
-        <div class="mb-3 row" id="status-alert">
-        </div>
 
         <div class="mb-3 row">
             <div class="d-grid gap-2 d-md-block">
@@ -258,6 +329,24 @@
             deckSizeHints[0].textContent = `(${decks.red.length})`;
             deckSizeHints[1].textContent = `(${decks.green.length})`;
             deckSizeHints[2].textContent = `(${decks.blue.length})`;
+        }
+
+        function batchAddCard(color) {
+            decks[color] = [];
+            const inputs = document.getElementById('multipleAdd').querySelectorAll('input');
+            inputs.forEach((el) => {
+                const count = el.value;
+                for (let idx = 0; idx < count; idx++) {
+                    decks[color].push(el.getAttribute('name'));   
+                }
+            });
+            updateDeckSize();
+        }
+
+        function batchClear() {
+            document.getElementById('multipleAdd').querySelectorAll('input').forEach((el) => {
+                el.value = 0;
+            })
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
