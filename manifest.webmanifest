@@ -1,0 +1,15 @@
+{
+    "background_color": "white",
+    "description": "Maximum Apocalypse",
+    "display": "fullscreen",
+    "icons": [
+        {
+            "src": "logo-square.png",
+            "sizes": "200x200",
+            "type": "image/png"
+        }
+    ],
+    "name": "Maximum Apocalypse",
+    "short_name": "Maximum Apocalypse",
+    "start_url": "index.html"
+}

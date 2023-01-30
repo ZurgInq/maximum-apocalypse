@@ -15,12 +15,16 @@
         <h2>Максимум Апокалипсис</h2>
         <h3>Находки</h3>
         <div class="mb-3 row fixed-top" id="status-alert"></div>
+        <div class="mb-3 row" id="draw-card-alert"></div>
         <div class="mb-3 row">
             <div class="col-sm-10">
                 <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-outline-danger" onclick="drawCardClick('red')">Взять карту <small class="deck-size">(0)</small></button>
-                    <button type="button" class="btn btn-outline-success" onclick="drawCardClick('green')">Взять карту <small class="deck-size">(0)</small></button>
-                    <button type="button" class="btn btn-outline-primary" onclick="drawCardClick('blue')">Взять карту <small class="deck-size">(0)</small></button>
+                    <button type="button" class="btn btn-outline-danger" onclick="drawCardClick('red')">Взять карту
+                        <small class="deck-size">(0)</small></button>
+                    <button type="button" class="btn btn-outline-success" onclick="drawCardClick('green')">Взять карту
+                        <small class="deck-size">(0)</small></button>
+                    <button type="button" class="btn btn-outline-primary" onclick="drawCardClick('blue')">Взять карту
+                        <small class="deck-size">(0)</small></button>
                 </div>
             </div>
         </div>
@@ -35,7 +39,7 @@
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="put-direct" id="direct-down" value="down" checked>
                 <label class="form-check-label" for="direct-down">под низ колоды</label>
-            </div>              
+            </div>
             <div class="mb-3 row">
                 <label for="add-card-select" class="col-sm-2 col-form-label">Находки:</label>
                 <div class="col-sm-10">
@@ -69,15 +73,18 @@
             </div>
             <div class="mb-3 row">
                 <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-outline-danger" onclick="addCardClick('red')">В красную</button>
-                    <button type="button" class="btn btn-outline-success" onclick="addCardClick('green')">В зелёную</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="addCardClick('blue')">В синюю</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="addCardClick('red')">В
+                        красную</button>
+                    <button type="button" class="btn btn-outline-success" onclick="addCardClick('green')">В
+                        зелёную</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="addCardClick('blue')">В
+                        синюю</button>
                 </div>
             </div>
         </form>
-        
+
         <button type="button" class="btn btn-secondary btn-sm" onclick="toggleBuildDeckClick()">Собрать колоды</button>
-        <button type="button" class="btn btn-secondary btn-sm" onclick="init()">Сброс колод</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="resetAll()">Сброс колод</button>
         <hr>
     </div>
     <div class="container" id="buildDeckContainer" hidden>
@@ -98,7 +105,7 @@
                     Топливо<input class="form-control" type="number" name="fuel">
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="mb-3 col-6">
                     Пистолет<input class="form-control" type="number" name="pistol">
@@ -107,8 +114,8 @@
                     Фонарь<input class="form-control" type="number" name="flashlight">
                 </div>
             </div>
-            
-        
+
+
             <div class="row">
                 <div class="mb-3 col-6">Противоядие<input class="form-control" type="number" name="antidote"></div>
                 <div class="mb-3 col-6">Засада<input class="form-control" type="number" name="ambush"></div>
@@ -118,40 +125,50 @@
                 <div class="mb-3 col-6">Рюкзак<input class="form-control" type="number" name="rucksack"></div>
             </div>
             <div class="row">
-                <div class="mb-3 col-6">Рация<input class="form-control" type="number" name="radio-set"></div>    
+                <div class="mb-3 col-6">Рация<input class="form-control" type="number" name="radio-set"></div>
             </div>
             <div class="row">
-                <div class="mb-3 col-6"><label class="form-label" style="color: green">Продукты <span id="productsCount"></span></label><input class="form-control" type="number" name="products-random"></div>
-                <div class="mb-3 col-6"><label class="form-label" style="color: blue">Вооружение <span id="armamentsCount"></span></label><input class="form-control" type="number" name="armament-random"></div>
+                <div class="mb-3 col-6"><label class="form-label" style="color: green">Продукты <span
+                            id="productsCount"></span></label><input class="form-control" type="number"
+                        name="products-random"></div>
+                <div class="mb-3 col-6"><label class="form-label" style="color: blue">Вооружение <span
+                            id="armamentsCount"></span></label><input class="form-control" type="number"
+                        name="armament-random"></div>
             </div>
             <div class="mb-3 row">
                 <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-outline-danger" onclick="batchAddCardClick('red')">В красную</button>
-                    <button type="button" class="btn btn-outline-success" onclick="batchAddCardClick('green')">В зелёную</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="batchAddCardClick('blue')">В синюю</button>
-                    <button type="button" class="btn btn-secondary" onclick="batchClear()">Сбросить</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="batchAddCardClick('red')">В
+                        красную</button>
+                    <button type="button" class="btn btn-outline-success" onclick="batchAddCardClick('green')">В
+                        зелёную</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="batchAddCardClick('blue')">В
+                        синюю</button>
+                    <button type="button" class="btn btn-secondary" onclick="batchClearClick()">Сбросить</button>
                 </div>
             </div>
         </form>
-
         <hr>
-
-        
         <form>
             <p>Случайные продукты:</p>
             <div class="mb-3 row">
                 <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-outline-danger" onclick="addRandomCardClick('red', products)">В красную</button>
-                    <button type="button" class="btn btn-outline-success" onclick="addRandomCardClick('green', products)">В зелёную</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="addRandomCardClick('blue', products)">В синюю</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="addRandomCardClick('red', products)">В
+                        красную</button>
+                    <button type="button" class="btn btn-outline-success"
+                        onclick="addRandomCardClick('green', products)">В зелёную</button>
+                    <button type="button" class="btn btn-outline-primary"
+                        onclick="addRandomCardClick('blue', products)">В синюю</button>
                 </div>
             </div>
             <p>Случайное вооружение:</p>
             <div class="mb-3 row">
                 <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-outline-danger" onclick="addRandomCardClick('red', armaments)">В красную</button>
-                    <button type="button" class="btn btn-outline-success" onclick="addRandomCardClick('green', armaments)">В зелёную</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="addRandomCardClick('blue', armaments)">В синюю</button>
+                    <button type="button" class="btn btn-outline-danger"
+                        onclick="addRandomCardClick('red', armaments)">В красную</button>
+                    <button type="button" class="btn btn-outline-success"
+                        onclick="addRandomCardClick('green', armaments)">В зелёную</button>
+                    <button type="button" class="btn btn-outline-primary"
+                        onclick="addRandomCardClick('blue', armaments)">В синюю</button>
                 </div>
             </div>
         </form>
@@ -161,26 +178,33 @@
         <form>
             <div class="mb-3 row">
                 <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-outline-primary" onclick="shuffleDeckClick()">Перемешать всё</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="shuffleDeckClick()">Перемешать
+                        всё</button>
                 </div>
             </div>
         </form>
 
         <div class="mb-3 row">
             <div class="d-grid gap-2 d-md-block">
-                <button type="button" class="btn btn-outline-danger btn-sm" onclick="viewDeckClick('red')">Список карт</button>
-                <button type="button" class="btn btn-outline-success btn-sm" onclick="viewDeckClick('green')">Список карт</button>
-                <button type="button" class="btn btn-outline-primary btn-sm" onclick="viewDeckClick('blue')">Список карт</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="viewDeckClick('red')">Список
+                    карт</button>
+                <button type="button" class="btn btn-outline-success btn-sm" onclick="viewDeckClick('green')">Список
+                    карт</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="viewDeckClick('blue')">Список
+                    карт</button>
             </div>
         </div>
     </div>
 
+    <script src="./js/gamepad.js"></script>
     <script>
         const decks = {
             red: [],
             green: [],
             blue: [],
         };
+
+        const storageKey = 'storage:0';
 
         const countProducts = {
             'products-1': 4,
@@ -201,6 +225,12 @@
 
         const products = [];
         const armaments = [];
+
+        const storage = {
+            decks,
+            products,
+            armaments,
+        }
 
         function fillCards(counters, cards) {
             for (const name in counters) {
@@ -223,7 +253,7 @@
 
             fillCards(countProducts, products);
             fillCards(countArmament, armaments);
-            batchClear();
+            batchClearClick();
             updateDeckSize();
         }
 
@@ -279,7 +309,7 @@
             alertStatusAdd(document.getElementById('status-alert'), 'Перемешано', 'success');
         }
 
-        function alertStatusAdd(target, message, type) {
+        function alertStatusAdd(target, message, type, autoHide = 1500) {
             const wrapper = document.createElement('div');
             wrapper.classList.add('alert', `alert-${type}`, 'alert-dismissible');
             wrapper.innerHTML = [
@@ -287,9 +317,11 @@
                 '   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>',
             ].join('');
             target.append(wrapper);
-            setTimeout(() => {
-                wrapper.querySelector('.btn-close').click();
-            }, 1500);
+            if (autoHide > 0) {
+                setTimeout(() => {
+                    wrapper.querySelector('.btn-close').click();
+                }, autoHide);
+            }
         }
 
         function getCardText(cardName) {
@@ -311,16 +343,18 @@
             alertStatusAdd(document.getElementById('status-alert'), 'Добавлена карта: ' + cardSelect.options[cardSelect.selectedIndex].innerText, 'success');
 
             updateDeckSize();
+            saveStorage();
         }
 
         function drawCardClick(color) {
             if (decks[color].length > 0) {
                 let drawnCard = decks[color].shift();
-                alert("Взяли карту: " + getCardText(drawnCard));
+                alertStatusAdd(document.getElementById('draw-card-alert'), 'Взяли карту: ' + getCardText(drawnCard), 'success', 10000);
                 updateDeckSize();
             } else {
-                alert("Колода пуста!");
+                alertStatusAdd(document.getElementById('draw-card-alert'), 'Колода пуста!', 'warning', 10000);
             }
+            saveStorage();
         }
 
         function updateDeckSize() {
@@ -330,7 +364,7 @@
             deckSizeHints[2].textContent = `(${decks.blue.length})`;
 
             document.getElementById('productsCount').textContent = `(${products.length})`;
-            document.getElementById('armamentsCount').textContent = `(${products.length})`;
+            document.getElementById('armamentsCount').textContent = `(${armaments.length})`;
         }
 
         function batchAddCardClick(color) {
@@ -342,7 +376,7 @@
                 for (let idx = 0; idx < count; idx++) {
                     if (cardName === 'products-random') {
                         addRandomCard(color, products);
-                    } else if(cardName === 'armament-random') {
+                    } else if (cardName === 'armament-random') {
                         addRandomCard(color, armaments);
                     } else {
                         decks[color].push(cardName);
@@ -351,16 +385,75 @@
             });
             updateDeckSize();
             shuffleDeckClick();
+            saveStorage();
         }
 
-        function batchClear() {
+        function batchClearClick() {
             document.getElementById('multipleAdd').querySelectorAll('input').forEach((el) => {
                 el.value = 0;
-            })
+            });
+            saveStorage();
+        }
+
+        function saveStorage() {
+            // localStorage.setItem(storageKey, JSON.stringify(storage));
+        }
+
+        function loadStorage() {
+            // let savedState = localStorage.getItem(storageKey);
+            // if (savedState) {
+            //     savedState = JSON.parse(savedState);
+            //     if (savedState) {
+            //         for (const [key, value] of Object.entries(storage)) {
+            //             console.log(key, savedState[key]);
+            //             if (savedState[key]) {
+            //                 storage[key] = savedState[key];
+            //             }
+            //         }
+            //         return true;
+            //     }
+            // }
+            // return false;
+        }
+
+        function resetStorage() {
+            for (const [key, value] of Object.entries(storage)) {
+                delete storage[key];
+            }
+        }
+
+        function resetAll() {
+            resetStorage();
+            init();
         }
 
         // init
-        init();
+        if (!loadStorage()) {
+            init();
+        }
+        updateDeckSize();
+
+        gamepadEvents.pressUp = (btn) => {
+            btn = parseInt(btn);
+            switch (btn) {
+                case BUTTON_X:
+                    drawCardClick('red');
+                    break;
+                case BUTTON_Y:
+                    drawCardClick('green');
+                    break;
+                case BUTTON_B:
+                    drawCardClick('blue');
+                    break;
+                case BUTTON_START:
+                    window.dispatchEvent(new KeyboardEvent('keydown', {
+                        bubbles: true, cancelable: true, keyCode: 13
+                    }));
+                    break;
+                default:
+                    break;
+            }
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
