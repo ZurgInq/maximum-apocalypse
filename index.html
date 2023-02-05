@@ -463,11 +463,6 @@
                 case BUTTON_B:
                     drawCardClick('blue');
                     break;
-                case BUTTON_START:
-                    window.dispatchEvent(new KeyboardEvent('keydown', {
-                        bubbles: true, cancelable: true, keyCode: 13
-                    }));
-                    break;
                 default:
                     break;
             }
